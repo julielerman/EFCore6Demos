@@ -12,7 +12,7 @@ using static System.Environment;
 public class PeopleContext : DbContext
 {
   public DbSet<Person> People { get; set; }
-
+public DbSet<Address> Addresses { get; set; }
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information)
@@ -37,7 +37,7 @@ public class PeopleContext : DbContext
      .HasConversion<string>();
    
     //Before EF Core 6: custom conversions FOR EACH PROPERTY were a PIA
-    modelBuilder.Entity<Address>().Property(ad=>ad.StructureColor)
+    modelBuilder.Entity<Address>().Property(ad=>ad.BuildingColor)
     .HasConversion(c=>c.ToString(),s=>Color.FromName(s));
 
    #endif
@@ -50,7 +50,9 @@ public class PeopleContext : DbContext
 
     configurationBuilder.Properties<AddressTypeEnum>().HaveConversion<string>();
     configurationBuilder.Properties<Color>().HaveConversion(typeof(ColorToStringConverter));
-    //mapping not limited to entity properties:
+    //One more mapping for edge cases:
+    // This is useful for certain queries with literals of this type
+    // when there is no entity type property to infer the type mapping from.
    configurationBuilder.DefaultTypeMapping<string>().IsUnicode(false);
 
   }

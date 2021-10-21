@@ -22,7 +22,7 @@ public class Address
   public string PostalCode { get; set; }
   public AddressTypeEnum AddressTypeEnum { get; set; }
   public string StreetLine2 { get; set; }
-  public Color StructureColor { get; set; }
+  public Color BuildingColor { get; set; }
 }
 
 public enum AddressTypeEnum

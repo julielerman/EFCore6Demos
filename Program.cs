@@ -17,13 +17,12 @@ namespace EFCore6Demos
       _context.Database.EnsureCreated();
       InsertAddress();
       InsertCyrillicAddress();
-      //ReadAddresswithValueconverters();
-      RareQuery();
+      ReadAddresswithValueconverters();
     }
 
     private static void InsertAddress()
     {
-      var add1 = new Address {City="北京", Street = "1 Main", StructureColor = System.Drawing.Color.Blue, AddressTypeEnum = AddressTypeEnum.Home };
+      var add1 = new Address {City="北京", Street = "1 Main", BuildingColor = System.Drawing.Color.Blue, AddressTypeEnum = AddressTypeEnum.Home };
       _context.Set<Address>().Add(add1);
       _context.SaveChanges();
     }
@@ -40,9 +39,6 @@ namespace EFCore6Demos
     {
       var addresses = _context.Set<Address>().ToList();
     }
-    private static void RareQuery()
-    {
-    var mylist= _context.People.Where(b => EF.Functions.DataLength("FirstName")!=b.FirstName.Length).ToList();
-   }
+   
   }
 }

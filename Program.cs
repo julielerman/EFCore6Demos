@@ -39,7 +39,7 @@ namespace EFCore6Demos
           _context = _poolingFactory.CreateDbContext();
     }
      [Benchmark]
-    public async Task<int> NoTracking_1KRows_withPooling()
+    public async Task<int> OneKRows_withPooling()
     {
        using var db = _poolingFactory.CreateDbContext();
         await foreach (var userRep in _query1K(db))
@@ -49,16 +49,13 @@ namespace EFCore6Demos
     }
 
     [Benchmark]
-    public async Task<int> NoTracking_OneRow_WithPooling()
+    public async Task<int> OneRow_WithPooling()
     {
       using var db = _poolingFactory.CreateDbContext();
-       var sum = 0;
-        await foreach (var userRep in _queryone(db))
+         await foreach (var userRep in _queryone(db))
         {
-            sum += 1;
         }
-
-        return sum;
+        return 0;
     }
 
     static void Main(string[] args)=>

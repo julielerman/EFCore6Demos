@@ -14,7 +14,7 @@ namespace EFCore6Demos
  private IDbContextFactory<SOContext> _poolingFactory;
     private SOContext _context;
 
-    //compiling the query so it doesn't trigger context or pooling effort
+    //pre-compiled query delegate, so it doesn't trigger context or pooling effort
     private static readonly Func<SOContext, IAsyncEnumerable<UserReputation>> _queryone
         = EF.CompileAsyncQuery((SOContext context) => context.UserReps.Take(1));
 

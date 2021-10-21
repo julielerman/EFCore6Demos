@@ -28,6 +28,7 @@ namespace EFCore6Demos
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //via scaffolding from database
             modelBuilder.Entity<UserReputation>(entity =>
             {
                 entity.HasNoKey();

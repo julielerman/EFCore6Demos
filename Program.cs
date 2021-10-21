@@ -35,20 +35,10 @@ namespace EFCore6Demos
         var serviceProvider = services.BuildServiceProvider();
         _poolingFactory = serviceProvider.GetRequiredService<IDbContextFactory<SOContext>>();
 
-         //Julie doesn't want to wipe out her database :)
-        // using (var context = _poolingFactory.CreateDbContext())
-        // {
-        //     await context.Database.EnsureDeletedAsync();
-        //     await context.Database.EnsureCreatedAsync();
-        // }
-
         //if I'm not using this, is it still impacting (helping/triggering) the poolling?
           _context = _poolingFactory.CreateDbContext();
     }
-    
-    
-
-    [Benchmark]
+     [Benchmark]
     public async Task<int> NoTracking_1KRows_withPooling()
     {
     

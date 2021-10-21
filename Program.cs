@@ -11,85 +11,58 @@ namespace EFCore6Demos
 {
   public class Program
   {
- private IDbContextFactory<SOContext> _poolingFactory;
+    private IDbContextFactory<SOContext> _poolingFactory;
     private SOContext _context;
 
     //compiling the query so it doesn't trigger context or pooling effort
     private static readonly Func<SOContext, IAsyncEnumerable<UserReputation>> _queryone
         = EF.CompileAsyncQuery((SOContext context) => context.UserReps.Take(1));
 
-  private static readonly Func<SOContext, IAsyncEnumerable<UserReputation>> _query1K
-        = EF.CompileAsyncQuery((SOContext context) => context.UserReps.Take(1000));
+    private static readonly Func<SOContext, IAsyncEnumerable<UserReputation>> _query1K
+          = EF.CompileAsyncQuery((SOContext context) => context.UserReps.Take(1000));
 
-     [GlobalSetup]
+    [GlobalSetup]
     public void Setup()
     {
-        var services = new ServiceCollection();
-        //pooling, non-tracking
-        //opt out of thread safety checks as you would in prod
-        services.AddPooledDbContextFactory<SOContext>(options => options
-            .UseSqlServer("Server=;Database=StackOverflow2010;Trusted_Connection=True;")
-            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-            .EnableThreadSafetyChecks(false)
-        );
-        var serviceProvider = services.BuildServiceProvider();
-        _poolingFactory = serviceProvider.GetRequiredService<IDbContextFactory<SOContext>>();
+      var services = new ServiceCollection();
+      //pooling, non-tracking
+      //opt out of thread safety checks as you would in prod
+      services.AddPooledDbContextFactory<SOContext>(options => options
+          .UseSqlServer("Server=;Database=StackOverflow2010;Trusted_Connection=True;")
+          .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+          .EnableThreadSafetyChecks(false)
+      );
+      var serviceProvider = services.BuildServiceProvider();
+      _poolingFactory = serviceProvider.GetRequiredService<IDbContextFactory<SOContext>>();
 
-        //Julie doesn't want to wipe out her database :)
-        // using (var context = _poolingFactory.CreateDbContext())
-        // {
-        //     await context.Database.EnsureDeletedAsync();
-        //     await context.Database.EnsureCreatedAsync();
-        // }
-
-        //if I'm not using this, is it still impacting (helping/triggering) the poolling?
-        _context = _poolingFactory.CreateDbContext();
-    }
-    
-    
-
-    [Benchmark]
-    public async Task<int> NoTracking_1KRows_withPooling()
-    {
-    
-       using var db = _poolingFactory.CreateDbContext();
-       //var sum = 0;
-        await foreach (var userRep in _query1K(db))
-        {
-            //sum += 1;
-        }
-
-        return 0;
+      //if I'm not using this, is it still impacting (helping/triggering) the poolling?
+      _context = _poolingFactory.CreateDbContext();
     }
 
-  
-
     [Benchmark]
-    public async Task<int> NoTracking_OneRow_WithPooling()
+    public async Task<int> OneKRows_withPooling()
     {
       using var db = _poolingFactory.CreateDbContext();
-       var sum = 0;
-        await foreach (var userRep in _queryone(db))
-        {
-            sum += 1;
-        }
-
-        return sum;
+      await foreach (var userRep in _query1K(db))
+      {
+      }
+      return 0;
     }
 
-    static void Main(string[] args)=>
-          
+    [Benchmark]
+    public async Task<int> OneRow_WithPooling()
+    {
+      using var db = _poolingFactory.CreateDbContext();
+      await foreach (var userRep in _queryone(db))
+      {
+      }
+      return 0;
+    }
+
+    static void Main(string[] args) =>
+
           BenchmarkRunner.Run<Program>();
-  }
-
-
-  public class UserReputation
-  {
-    public int Id { get; set; }
-    public string Displayname { get; set; }
-    public int Reputation { get; set; }
   }
 }
 
 
-    

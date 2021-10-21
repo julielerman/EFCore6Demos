@@ -14,7 +14,7 @@ namespace EFCore6Demos
         _context.Database.EnsureDeleted();
          _context.Database.EnsureCreated();
       SeedSomeData();
-      //TemporalQuery();
+      TemporalQuery();
     }
 
     private static void TemporalQuery()

@@ -48,6 +48,7 @@ public DbSet<Address> Addresses { get; set; }
   protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
   {
 
+    configurationBuilder.Properties<string>().HaveColumnType("varchar(100)");
     configurationBuilder.Properties<AddressTypeEnum>().HaveConversion<string>();
     configurationBuilder.Properties<Color>().HaveConversion(typeof(ColorToStringConverter));
     //One more mapping for edge cases:

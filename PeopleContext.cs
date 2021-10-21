@@ -34,7 +34,8 @@ public class PeopleContext : DbContext
       }
     }
      //Before EF Core 6: configure a conversion PER PROPERTY ONLY
-     modelBuilder.Entity<Address>().Property(a=>a.AddressTypeEnum).HasConversion<string>();
+     modelBuilder.Entity<Address>().Property(a=>a.AddressTypeEnum)
+     .HasConversion<string>();
    
     //Before EF Core 6: custom conversions FOR EACH PROPERTY were a PIA
     modelBuilder.Entity<Address>().Property(ad=>ad.StructureColor)

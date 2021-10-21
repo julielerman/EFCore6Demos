@@ -10,15 +10,7 @@ namespace EFCore6Demos
     }
 
     public DbSet<UserReputation> UserReps { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-      if (!optionsBuilder.IsConfigured)
-      {
-        optionsBuilder.UseSqlServer(
-            "Server=;Database=StackOverflow2010;Trusted_Connection=True;");
-      }
-    }
-
+ 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       //via scaffolding from database

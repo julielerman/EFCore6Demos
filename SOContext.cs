@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace EFCore6Demos
 {
-    public  class SOContext : DbContext
+  public  class SOContext : DbContext
       {
      public SOContext(DbContextOptions<SOContext> options)
             : base(options)

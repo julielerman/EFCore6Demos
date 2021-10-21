@@ -14,13 +14,13 @@ namespace EFCore6Demos
         _context.Database.EnsureDeleted();
          _context.Database.EnsureCreated();
       SeedSomeData();
-      TemporalQuery();
+      //TemporalQuery();
     }
 
     private static void TemporalQuery()
     {
       var resultTypical = _context.People.ToList();
-      DateTime auditDate = DateTime.Parse("2021-10-16 17:21:25");
+      DateTime auditDate = DateTime.Parse("2021-10-21 12:51:50");
       var resultTemporal = _context.People.TemporalAsOf(auditDate).ToList();
     }
 

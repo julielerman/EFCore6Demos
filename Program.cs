@@ -41,17 +41,12 @@ namespace EFCore6Demos
      [Benchmark]
     public async Task<int> NoTracking_1KRows_withPooling()
     {
-    
        using var db = _poolingFactory.CreateDbContext();
-       //var sum = 0;
         await foreach (var userRep in _query1K(db))
-        {
-            //sum += 1;
+        { 
         }
       return 0;
     }
-
-  
 
     [Benchmark]
     public async Task<int> NoTracking_OneRow_WithPooling()

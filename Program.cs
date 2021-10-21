@@ -26,7 +26,7 @@ namespace EFCore6Demos
     {
         var services = new ServiceCollection();
         //pooling, non-tracking
-        //opt out of thread safety checks as you would in prod
+        //for EF Core 6: opt out of thread safety checks as you would in prod
         services.AddPooledDbContextFactory<SOContext>(options => options
             .UseSqlServer("Server=;Database=StackOverflow2010;Trusted_Connection=True;")
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)

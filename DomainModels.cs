@@ -11,28 +11,8 @@ public class Person
     public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-   // public string FullName => $"{FirstName.Trim()} {LastName.Trim()}";
-    public List<Address> Addresses { get; set; }
-    //public PersonName Name { get; set; }
+     public List<Address> Addresses { get; set; }
     public string MiddleName {get;set;}
-}
-
-
-
-public class PersonName
-{
-    private PersonName()
-    {
-
-    }
-    public string FirstName { get; private set; }
-    public string LastName { get; private set; }
-    public PersonName(string first, string last)
-    {
-        FirstName = first;
-        LastName = last;
-    }
-    public string FullName => $"{FirstName.Trim()} {LastName.Trim()}";
 }
 
 public class Address

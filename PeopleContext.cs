@@ -1,13 +1,10 @@
 //using CompiledModelDemo.TheCompiledStuff;
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Linq.Expressions;
-using EFCore6Demos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
-using static System.Environment;
 
 public class PeopleContext : DbContext
 {

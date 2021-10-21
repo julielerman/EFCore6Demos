@@ -16,8 +16,7 @@ public class PeopleContext : DbContext
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information)
-     .UseSqlServer("Server=.;Database=BulkConvertersDemo,Trusted_Connection=True;");
-  
+     .UseSqlServer("Server=localhost;Database=BulkConvertersDemo;Trusted_Connection=True;");
   }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)

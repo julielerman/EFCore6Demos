@@ -39,7 +39,7 @@ namespace EFCore6Demos
           _context = _poolingFactory.CreateDbContext();
     }
      [Benchmark]
-    public async Task<int> OneKRows_withPooling()
+    public async Task<int> EFC5_1KRows_withPooling()
     {
        using var db = _poolingFactory.CreateDbContext();
         await foreach (var userRep in _query1K(db))
@@ -49,7 +49,7 @@ namespace EFCore6Demos
     }
 
     [Benchmark]
-    public async Task<int> OneRow_WithPooling()
+    public async Task<int> EFC5_1Row_WithPooling()
     {
       using var db = _poolingFactory.CreateDbContext();
          await foreach (var userRep in _queryone(db))

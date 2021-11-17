@@ -20,7 +20,7 @@ public DbSet<Address> Addresses { get; set; }
   {
    #region efcore5 code not compiled
    #if false
-    //Before EF Core 6: configure a particular type
+    //Before EF Core 6: generically configure a particular type
     foreach (var entity in modelBuilder.Model.GetEntityTypes ()) 
     {
       foreach (var prop in entity.GetProperties ()

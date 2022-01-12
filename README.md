@@ -5,6 +5,8 @@ These are the demos I used in the conference session "EF COre 6: Working on the 
 Presented at 
 
 [DotNext 2021](https://dotnext-moscow.ru/en/schedule/) October 2021
+BuildStuff November 2021
+[CodeMag Webinar] (https://www.youtube.com/watch?v=B8RPukX4BXA) Jan 2022
 
 There are  5 demos across the branches of this repository.
 

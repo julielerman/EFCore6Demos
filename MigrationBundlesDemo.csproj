@@ -6,8 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
   <!-- note: using specific version, not *, because of wierdness with efbundle and nightly builds -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.*" />
   </ItemGroup>
 
 </Project>
